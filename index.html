@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <nav id="navbar">
+        <div class="logo__wrapper">
+          <img class="logo" src="https://www.viziopoint.com/images/css3-logo.png" alt="vue-logo" />
+        </div>
+        <header>
+          CSS Guia Técnica
+        </header>
+        <ul>
+          <li><a class="nav-link" href="#¿Que_es_CSS?">¿Que es CSS?</a></li>
+          <li>
+            <a class="nav-link" href="#Reglas_y_propiedades">Reglas y propiedades</a>
+          </li>
+          <li>
+            <a class="nav-link" href="#La_cascada:_herencia,_sobreescritura_y_conflictos_de_estilos"
+              >La cascada: herencia, sobreescritura y conflictos de estilos</a
+            >
+          </li>
+          <li><a class="nav-link" href="#Clases_y_IDs">Clases y IDs</a></li>
+          <li><a class="nav-link" href="#Background_y_color">Background y color</a></li>
+          <li>
+            <a class="nav-link" href="#Bordes_con_CSS">Bordes con CSS</a>
+          </li>
+          <li><a class="nav-link" href="#DIVs">DIVs</a></li>
+          <li><a class="nav-link" href="#Margin_(Márgenes)">Margin (Márgenes)</a></li>
+          <li><a class="nav-link" href="#Padding">Padding</a></li>
+          <li><a class="nav-link" href="#Referencias">Referencias</a></li>
+        </ul>
+      </nav>
+      <main id="main-doc">
+        <section class="main-section" id="¿Que_es_CSS?">
+          <header>¿Que es CSS?</header>
+          <article>
+            <p>
+              Las hojas de estilo CSS son un conjunto reglas que enumeran en un fichero .css y que
+              describen el aspecto que deben tener los diferentes elementos HTML de una página.
+            </p>
+            <p>
+              Lo interesante de esto es que funcionan con una filosofía de patrones o plantillas, es
+              decir, no es necesario especificar cada uno de los elementos, sino que se pueden
+              definir reglas
+            </p>
+
+            <p>
+              A modo de comparación, si dominas el uso de estilos en Microsoft Word, verás que esto
+              se parece mucho al concepto de estilo en Word, aunque las CSS son infinitamente más
+              potentes que Word en todas sus posibilidades.
+            </p>
+            <p>
+              Veamos un ejemplo concreto de cómo se expresarían las reglas anteriores en el lenguaje
+              de las CSS:
+            </p>
+            <code>
+              h1, h2 { color: black; font-size: 16px; } h2 { font-size: 14px; } p { color:
+              rgb(32,32,32); text-align: left; }
+            </code>
+          </article>
+        </section>
+        <section class="main-section" id="Reglas_y_propiedades">
+          <header>Reglas y propiedades</header>
+          <article>
+            <p>
+              En el ejemplo anterior tenemos un total de 3 reglas, cada una se compone de un
+              selector que indican a qué elementos HTML aplica la regla que es el texto que precede
+              a las llaves de apertura y cierre de la regla. En la primera regla, el selector es
+              “h1, h2”, en la segunda “h2” y en la tercera “p”. Cada regla se compone a su vez de
+              propiedades que especifican qué exactamente se hará con esos los elementos HTML a los
+              que aplica. El selector de la primera regla, por ejemplo, indica que esta regla se
+              refiere a los elementos HTML h1 y h2 y que a ellos se aplicarán el color negro
+              (propiedad “color”) y un tamaño de letra de 16 pixeles al texto (propiedad
+              “font-size”). Hay cientos de propiedades de las cuales destacaré luego las que, en mi
+              experiencia, me han parecido las más frecuentemente usadas y más útiles. En cuanto a
+              los selectores, los ejemplos han sido triviales puesto que se refieren a elementos
+              HTML sin más, pero hay formas mucho más sofisticadas de diseñar selectores. Un ejemplo
+              rápido de esto:
+            </p>
+            <code>
+              p a { text-decoration: underline: } p.text-izq { text-align: left; }
+            </code>
+            <p>
+              En la primera regla se han anidado dos elementos para indicar que esta regla sólo se
+              refiere a enlaces (etiqueta a en HTML) dentro de párrafos de texto (etiqueta p en
+              HTML) y que a estos enlaces se le aplicará un subrayado. Es decir, esta regla no
+              aplica a elementos a>que no se encuentren dentro de un párrafo (p). En la segunda
+              regla se ha especificado algo parecido, pero jugando con un elemento y un atributo de
+              clase. Es decir, esta regla aplicará a párrafos que contienen un atributo “class” con
+              el valor “text-izq”
+            </p>
+          </article>
+        </section>
+        <section
+          class="main-section"
+          id="La_cascada:_herencia,_sobreescritura_y_conflictos_de_estilos"
+        >
+          <header>La cascada: herencia, sobreescritura y conflictos de estilos</header>
+          <article>
+            <p>
+              El nombre de hojas de estilo en “cascada” no es casual, expresa que los estilos que
+              especifican con reglas se pueden heredar de una manera jerárquica. Es decir, veamos
+              esta regla:
+            </p>
+            <code> body { font-family: Arial; }</code>
+            <p>
+              Aquí estamos diciendo que la etiqueta body que es la que envuelve el contenido de
+              cualquier página web tenga un tipo de letra “Arial”. Esto no tendría mucho sentido si
+              no fuera porque gracias a la capacidad de herencia de las reglas de este modo por
+              defecto cualquier elemento hijo como un título o un párrafo va a “heredar” ese estilo,
+              salvo que especifique lo contrario como, por ejemplo, en esta regla:
+            </p>
+            <code> p { font-family: Verdana; }</code>
+            <p>
+              En esta última regla aplica el principio de “especificidad”. En principio, se
+              plantearía un conflicto entre la regla general de body con lo que dice la regla de p,
+              pero se resuelve fácilmente puesto que se aplica la regla más específica y referirse a
+              un párrafo es más específico que referirse a “los elementos hijos que pueden dentro de
+              body”. Igualmente, una regla con un selector “p a” (enlace dentro de un párrafo)
+              tendría precedencia sobre una regla con un selector “a” que se refiere a un enlace a
+              secas. De nuevo, sabiendo esto, te apañaras bien en el 99% de los casos.
+            </p>
+          </article>
+        </section>
+        <section class="main-section" id="Clases_y_IDs">
+          <header>Clases y IDs</header>
+          <article>
+            <p>
+              Algo que siempre causa alguna confusión cuando escribimos CSS es determinar si debemos
+              aplicar esas definiciones como clases o IDs ¿Cuál es la diferencia?
+            </p>
+
+            <p>
+              Tanto una como otra sirven para identificar una etiqueta y, de ese modo, nos resulta
+              más sencillo agregarle propiedades. Por ejemplo:
+            </p>
+            <code>
+              HTML &&lt;style> #nombreID {color: red;} .nombreClase {color: blue;} &lt;/style>
+              &lt;div id="nombreID"> este texto será rojo &lt;/div> &lt;div class="nombreClase">
+              este texto será azul &lt;/div>
+            </code>
+            <p>
+              Para definir las propiedades de un ID le anteponemos el símbolo # al nombre y para
+              definir una clase, usamos un punto.
+            </p>
+
+            <p>
+              Una regla elemental y que no debe violarse dice que sólo usaremos un ID si esa
+              etiqueta es única, no debería haber dos etiquetas con el mismo ID en la misma página;
+              en cambio, usaremos class si es un estilo que repetiremos en diferentes etiquetas.
+            </p>
+
+            <p>
+              Además, suele decirse que el atributo ID se utiliza para definir áreas específicas de
+              una página (el header, el footer, un menú, etc) y una clase se usa para definir
+              estilos de tipo general (enlaces, listas, etc).
+            </p>
+            <p>
+              Los ID nos permiten organizar el estilo e identificar etiquetas para luego
+              manipularlas con JavaScript. Las clases, nos evitan escribir códigos repetidos y esa
+              es su mayor utilidad.
+            </p>
+            <code
+              >CSS Hay varias formas de implementarlas: a.green {color: green;} hará que los enlaces
+              que contengan esa clase, se muestren de color verde: &lt;a class="green"> el enlace
+              será de color verde &lt;/a> &lt;p class="green"> este párrafo NO será de color verde
+              &lt;/p> En cambio, esta otra: .green {color: green;} hará que cualquier etiqueta que
+              contengan esa clase, se muestren de color verde: &lt;a class="green"> el enlace será
+              de color verde &lt;/a> &lt;p class="green"> este párrafo también será de color verde
+              &lt;/p>
+            </code>
+            <p>
+              Tanto las clases como los IDs pueden combinarse asi que no es extraño ver cosas como
+              estas:
+            </p>
+            <code>&lt;div id="unNombre" class="unaClase"> ....... &lt;/div></code>
+            <p>o bien:</p>
+            <code>&lt;div class="unaClase otraClase"> ....... &lt;/div></code>
+          </article>
+        </section>
+        <section class="main-section" id="Background_y_color">
+          <header>Background y color</header>
+          <p>
+            La propiedad background proporciona un fondo de color al elemento HTML. En este caso lo
+            añadiremos junto con el cambio de color del texto. O sea, vamos a aplicar dos
+            propiedades CSS en línea.
+          </p>
+          <code>
+            Propiedades a modificar: background | color Valores de las propiedades: #000000; |
+            #FFFFFF;
+          </code>
+        </section>
+        <section class="main-section" id="Bordes_con_CSS">
+          <header>Bordes con CSS</header>
+          <article>
+            Es el momento de atreverte a darle al párrafo el aspecto de un botón. Para ello
+            añadiremos a las anteriores la propiedad border-radius; que determina el redondeo de las
+            esquinas, junto a la propiedad display; que hará que el párrafo no ocupe toda la línea.
+            <code>
+              Propiedades a modificar: background | color | padding | display | border-radius
+              Valores de las propiedades: #3bcdfe; | #FFFFFF; | 15px | inline-block | 6px
+            </code>
+          </article>
+        </section>
+        <section class="main-section" id="DIVs">
+          <header>DIVs</header>
+          <article>
+            <p>
+              Mientras que en el pasado se diseñaba todo mediante tablas, hoy el soporte para el
+              diseño con DIV permite creaciones extraodinariamente complejas y estructuradas, sin
+              los problemas de las tablas en los espacios vacíos que se solventaban con trucos -como
+              imágenes transparentes-.
+            </p>
+            <p>
+              Sin embargo los DIV tienen sus propio problemas con los porcentajes, con la flotación
+              que desborda el contenedor y con los cambios de tamaño que sufre un DIV al aplicarle
+              la propiedad CSS padding, aún así son más fáciles de controlar y modificar, algo que
+              con tablas es una tarea bastante difícil.
+            </p>
+            <p><strong>Flotar o no flotar</strong></p>
+            <p>
+              En el diseño CSS, todo se trata de elementos flotando en contenedores para formar
+              hileras de DIV.
+            </p>
+            <p>
+              Todos estos problemas los resolveremos, de momento veremos las claves del diseño con
+              DIV mediante float (position lo veremos luego).
+            </p>
+            <p>
+              El diseño mediante flotación requiere de tres propiedades CSS y condiciones de
+              funcionamiento.
+            </p>
+            <p><strong>Puntualizaciones CSS</strong></p>
+
+            <ol>
+              <li>
+                Float o flotar: Los elementos se flotan para que ocupen una posición dentro de un
+                contenedor.
+              </li>
+              <li>Todos los elementos que esten dentro del contenedor deberán contener float.</li>
+              <li>Solamente se puede flotar a la derecha o la izquierda.</li>
+              <li>
+                Clear o limpiar: Se requieren limpiar la flotación para establecer el límite de
+                flotación izquierdo y derecho.
+              </li>
+              <li>
+                Width o ancho: Se requiere que el contenedor y todos los elementos flotados
+                funcionen con un ancho definido. Es cierto que todos los elementos podrían manejarse
+                por porcentajes, pero tienen grandes defectos con los nuevos navegadores y el zoom o
+                los problemas del calculo de tamaño con padding, siempre deberá existir al menos un
+                contenedor con un tamaño en pixeles.
+              </li>
+            </ol>
+            <p><strong>Puntualizaciones Conceptuales</strong></p>
+            <ol>
+              <li>
+                El diseño con div es modular, esto es; una pagina se compone de diferentes div
+                contenedores que contienen o no, elementos flotados o dispuesto de forma vertical.
+              </li>
+              <li>
+                El div que contiene otros div flotados requiere otro div que evite que se contraiga
+                el contenedor.
+              </li>
+
+              <li>
+                El alto y los porcentajes no funcionaran sin un referente con una medida absoluta,
+                valores como 100% no tienen sentido, pues el alto nunca tienen un tamaño fijo a
+                diferencia del ancho que en último caso será el tamaño del ancho del de la ventana
+                del navegador, se establece un alto en una medida como pixeles digamos el contenedor
+                mide 500px y todo los div dentro podrán usar porcentajes, aunque diseñar un height
+                absoluto tiene muchos inconvenientes.
+              </li>
+              <li>Todos los elementos necesitan del uso de clases o ID.</li>
+            </ol>
+            <p>
+              Vamos hacer un ejercicio bastante simple flotando 3 DIV dentro de un tercero, usaremos
+              únicamente ID con una única instrucción CSS.
+            </p>
+            <p>Este es nuestra estructura de DIV.</p>
+            <code
+              >&lt;div> &lt;div>Contenido 1&lt;/div> &lt;div>Contenido 2&lt;/div> &lt;div>Contenido
+              3&lt;/div> &lt;/div>
+            </code>
+            <p>Si les agregamos un solo ID al contenedor que llamaremos "contenedor-mains":</p>
+            <code>
+              &lt;div id="contenedor-mains"> &lt;div>Contenido 1&lt;/div> &lt;div>Contenido
+              2&lt;/div> &lt;div>Contenido 3&lt;/div> &lt;/div>
+            </code>
+            <p>
+              En CSS usamos el siguiente código (Los ID van precedidos de "#" y los Class de "." sin
+              embargo cuando se agregan a las etiquetas id="" y class="" no se pone ni #, ni "."):
+            </p>
+
+            <code>
+              #contenedor-mains { background:#000; width:450px; } #contenedor-mains div { border:2px
+              solid #FF0100; background:#fff; width:120px; margin:10px; }
+            </code>
+            <ol>
+              <li>
+                Esto significa que el #contenedor-mains tendrá un ancho de 450px, con un fondo de
+                negro.
+              </li>
+              <li>
+                En la segunda instrucción que en relidad es una condición de la primera al
+                #contenedor-mains le agregamos div, que significa que todo div dentro el objeto con
+                un ID #contenedor-mains tendrán un borde de 2 pixeles y un margen entre ellos de
+                10px y un ancho de 120px.
+              </li>
+            </ol>
+          </article>
+        </section>
+        <section class="main-section" id="Margin_(Márgenes)">
+          <header>Margin (Márgenes)</header>
+          <article>
+            <p>
+              Margin en una de las propiedades CSS más básicas y simples. Pero también es una de las
+              propiedades que constantemente nos dará muchos problemas, esto sucede porque en muchos
+              casos, diferentes navegadores le asignan diferentes valores.
+            </p>
+            <p>
+              La función de Margin es básicamente separar dos elementos de bloque como una DIV, una
+              Tabla, una imagen, etcétera.
+            </p>
+            <p>
+              Podemos asigna un marquen para cada lado de un elemento de linea, esto es: Arriba
+              (Top), Derecha (Right), Abajo (Bottom) y Izquierda (Left), en ese preciso orden se
+              declaran (orden horario o "Y, X, -Y, -X").
+            </p>
+            <p>
+              Un ejemplo simple declarando directamente en Margin todos los valores sería;
+            </p>
+            <code>margin:10px 20px 5px 30px;</code>
+            <p>
+              El primer valor es la separación en pixeles hacia arriba, sigue izquierda, luego abajo
+              y termina con el valor derecha.
+            </p>
+            <p>
+              Si esto lo convirtiéramos a subpropiedades sería (No importa el orden):
+            </p>
+            <code>margin-top:10px; margin-bottom:5px; margin-right:30px; margin-left:20px;</code>
+            <p><strong>Valores Verticales y Horizontales</strong></p>
+            <p>
+              Siempre es mas sencillo usar la propiedad margin directamente, lo que nos ayuda
+              ahorrar peso de la página web. Podemos ser más estilizados en ello, aprovechando que
+              los valores se ordenan vertical y horizontalmente, recordemos que el primer valor
+              vertical es el primero (arriba) y el segundo el horizontal es la derecha, si no hay un
+              valor para abajo e izquierda los valores se heredan.
+            </p>
+            <p>por ejemplo:</p>
+            <code>margin: 10px 5px;</code>
+            <p>Si lo convertimos a subpropiedades sería:</p>
+            <code>margin-top:10px; margin-bottom:10px; margin-right:5px; margin-left:5px;</code>
+          </article>
+        </section>
+        <section class="main-section" id="Padding">
+          <header>Padding</header>
+          <article>
+            <p>
+              El padding o como su nombre lo indica "relleno" es el espacio interior en un
+              contenedor con los objetos que contiene, a diferencia del Margin que es la separación
+              con otros objetos contenedores u objetos de linea o de caja.
+            </p>
+            <p>
+              El padding se forma de 4 partes: Alto, izquierda, abajo y derecha, esto es; dos
+              valores verticales y dos horizontales.
+            </p>
+            <p>La regla css básica de padding es:</p>
+            <code>padding: n + unidad;</code>
+            <p>
+              Por ejemplo si se lo agregaramos a una div:
+            </p>
+            <code>&lt;div style="padding:10px;widht:200px;"> contenido &lt;/div> </code>
+            <p>
+              Esto significa que el espacio entre el div y el contenido es de 10 pixeles, con un div
+              de 200 pixeles
+            </p>
+
+            <p>
+              Sin embargo, se darán cuenta que si miden el div, su verdadero ancho será de 220
+              pixeles, esto es porque el padding empuja el contenido a partir del valor puesto en
+              width o ancho y height o alto.
+            </p>
+            <p>
+              Para este caso en vertical y horizontal se agregan 10px por lado se suman 20px en
+              vertical y 20px en horizontal.
+            </p>
+          </article>
+        </section>
+        <section class="main-section" id="Referencias">
+          <header>Referencias</header>
+          <article>
+            <ul>
+              <li>
+                Toda la documentación de esta página fue extraída de los siguientes lugares
+                <a href="https://cgnauta.blogspot.com/p/css.html" target="_blank">CGNATULA</a>
+                <a href="http://www.westciv.com/style_master/academy/css_tutorial/" target="_blank"
+                  >WESTCIV</a
+                >
+                <a
+                  href="https://www.ciudadano2cero.com/aprender-css-basico-desde-cero/"
+                  target="_blank"
+                  >CIUDADANO2.0</a
+                >
+              </li>
+            </ul>
+          </article>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
